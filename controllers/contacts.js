@@ -45,9 +45,7 @@ const getContact = async (req, res) => {
 };
 
 const createContact = async (req, res) => {
-  const { _id: owner } = req.user;
-  const newContact = await Contact.create({ ...req.body, owner });
-
+  const newContact = await Contact.create(req.body);
   res.status(201).json(newContact);
 };
 
@@ -95,7 +93,7 @@ const renewContact = async (req, res) => {
 
 const updateStatusContact = async (req, res) => {
   if (Object.keys(req.body).length === 0) {
-    throw HttpError(400, 'Missing favorite field');
+    throw HttpError(400, 'missing field favorite');
   }
 
   const { contactId } = req.params;
