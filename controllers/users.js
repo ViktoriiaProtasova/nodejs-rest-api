@@ -115,6 +115,15 @@ const updateAvatar = async (req, res) => {
   res.status(200).json({ avatarURL: avatarURL });
 };
 
+// Маршрут для отримання аватару користувача
+
+const getAvatar = async (req, res) => {
+  const fileName = req.params.fileName;
+  const filePath = path.join(__dirname, '../', 'public', 'avatars', fileName);
+
+  res.sendFile(filePath);
+};
+
 module.exports = {
   register: ctrlWrapper(register),
   login: ctrlWrapper(login),
@@ -122,4 +131,5 @@ module.exports = {
   logout: ctrlWrapper(logout),
   updateSubscription: ctrlWrapper(updateSubscription),
   updateAvatar: ctrlWrapper(updateAvatar),
+  getAvatar: ctrlWrapper(getAvatar),
 };
