@@ -6,7 +6,9 @@ const ctrl = require('../../controllers/users');
 const router = express.Router();
 
 router.post('/register', validateBody(schemas.registerSchema), ctrl.register);
+router.get('/verify/:verificationToken', ctrl.verificationEmail);
 router.post('/login', validateBody(schemas.loginSchema), ctrl.login);
+router.post('/verify', validateBody(schemas.emailSchema), ctrl.resendVerifyEmail);
 router.get('/current', authenticate, ctrl.getCurrent);
 router.get('/avatars/:fileName', ctrl.getAvatar);
 router.post('/logout', authenticate, ctrl.logout);
